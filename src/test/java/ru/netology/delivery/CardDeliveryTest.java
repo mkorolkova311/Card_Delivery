@@ -23,7 +23,7 @@ open("http://localhost:7777/");
        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
        $("[data-test-id=date] input").setValue(LocalDate.of(2021,02,04).format(DateTimeFormatter.ofPattern("dd.MM.uuuu")));
        $("[data-test-id=name] input").setValue("Маргарита Королькова");
-       $("[data-test-id=phone] input").setValue("+798122221");
+       $("[data-test-id=phone] input").setValue("+79812222111");
        $("[data-test-id=agreement]").click();
        $(withText("Забронировать")).click();
        $("[data-test-id=notification]").waitUntil(Condition.visible,15000);
