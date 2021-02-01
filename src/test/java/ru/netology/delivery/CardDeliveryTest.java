@@ -21,11 +21,15 @@ void shouldDeliveryFormTest(){
 open("http://localhost:7777/");
        $("[placeholder=\"Город\"]").setValue("Москва");
        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-       $("[data-test-id=date] input").setValue(LocalDate.of(2021,02,04).format(DateTimeFormatter.ofPattern("dd.MM.uuuu")));
+       String inputDate = LocalDate.now().plusDays(4).format(DateTimeFormatter.ofPattern("dd.MM.uuuu"));
+       $("[data-test-id=date] input").setValue(inputDate);
+       //$("[data-test-id=date] input").setValue(LocalDate.of(2021,02,04).format(DateTimeFormatter.ofPattern("dd.MM.uuuu")));
        $("[data-test-id=name] input").setValue("Маргарита Королькова");
        $("[data-test-id=phone] input").setValue("+79812222111");
        $("[data-test-id=agreement]").click();
        $(withText("Забронировать")).click();
        $("[data-test-id=notification]").waitUntil(Condition.visible,15000);
+       $(".notification__content").shouldHave(Condition.exactText("Встреча успешно забронирована на " + inputDate));
+
     }
 }
